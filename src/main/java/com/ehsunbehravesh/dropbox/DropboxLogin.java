@@ -5,14 +5,9 @@ import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuthNoRedirect;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +15,8 @@ import java.util.logging.Logger;
  */
 public class DropboxLogin {
 
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(DropboxLogin.class);
+    
     private String appKey;
     private String appSecret;
     private String userAgent;
@@ -33,7 +30,7 @@ public class DropboxLogin {
             appSecret = dropboxConfig.getProperty("app_secret");
             userAgent = dropboxConfig.getProperty("user_agent");
         } catch (Exception ex) {
-            Logger.getLogger(DropboxLogin.class.getName()).log(Level.SEVERE, "Error in loading Dropbox app config parameters. File dropbox.properties must be in the classpath.", ex);
+            log.error("Error in loading Dropbox app config parameters. File dropbox.properties must be in the classpath.", ex);
         }
     }
 
